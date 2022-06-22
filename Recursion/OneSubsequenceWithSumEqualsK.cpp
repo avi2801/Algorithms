@@ -1,7 +1,8 @@
+
 #include<bits/stdc++.h>
 using namespace std;
 
-void solve(int ind,vector<int>&ar,int sum,int target,int nums[],int n)
+bool solve(int ind,vector<int>&ar,int sum,int target,int nums[],int n)
 {
     //cout<<sum<<" ";
     if(ind == n)
@@ -14,26 +15,31 @@ void solve(int ind,vector<int>&ar,int sum,int target,int nums[],int n)
                 cout<<it<<" ";
             }
             cout<<endl;
+			return true;
         }
-        return ;
+        return false;
     }
     ar.push_back(nums[ind]);
     sum+=nums[ind];
 
-    solve(ind+1,ar,sum,target,nums,n);
+    if(solve(ind+1,ar,sum,target,nums,n) == true) return true;
 
     sum-=nums[ind];
     ar.pop_back();
 
-    solve(ind+1,ar,sum,target,nums,n);
+    if(solve(ind+1,ar,sum,target,nums,n) == true) return true;
+
+	return false;
 }
 
 int main()
 {
-    int nums[] = {2,3,6,7};
-    int target = 7;
-    int n = 4;
+    int nums[] = {1,2,1};
+    int target = 2;
+    int n = 3;
     vector<int>ar;
     int sum = 0;
     solve(0,ar,0,target,nums,n);
 }
+
+
